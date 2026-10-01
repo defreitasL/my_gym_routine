@@ -6,14 +6,14 @@
   <meta name="theme-color" content="#111b24" />
   <meta name="description" content="Mi rutina Upper/Lower: registro de pesos y series, historial y progreso." />
   <title>My Gym Routine · Mi entrenamiento</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
   <div class="app-shell">
     <header class="hero" id="top">
       <nav class="topbar" aria-label="Navegación principal">
-        <a class="brand" href="#home"><span class="brand-icon" aria-hidden="true">↗</span><span>MY GYM<span class="brand-sub">LUCAS / TRAINING JOURNAL</span></span></a>
-        <button class="nav-toggle" id="navToggle" aria-label="Abrir navegación" aria-expanded="false">☰</button>
+        <a class="brand" href="#home"><span class="brand-icon" aria-hidden="true">↗</span><span>MY GYM<span class="brand-sub">MY TRAINING JOURNAL</span></span></a>
+        <div class="preferences"><label class="sr-only" for="languageSelect">Idioma</label><select id="languageSelect" aria-label="Idioma"><option value="es">ES</option><option value="en">EN</option><option value="pt-BR">PT-BR</option></select><button type="button" id="themeToggle" aria-label="Cambiar a modo oscuro">☾</button></div><button class="nav-toggle" id="navToggle" aria-label="Abrir navegación" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
           <a href="#home">Inicio</a><a href="#workouts">Rutina</a><a href="#history">Historial</a><a href="#stats">Progreso</a><a href="#diet">Nutrición</a><a href="#backup">Mis datos</a>
         </div>
@@ -37,16 +37,18 @@
     </header>
     <main>
       <section class="page active" id="homePage" data-page="home"><div id="resumeBanner"></div><div class="section-heading"><p class="eyebrow">CONSTANCIA, A MI RITMO</p><h2>Mi semana de entrenamiento</h2><p>Cuatro sesiones de fuerza, dos días flexibles de cardio y un día de recuperación.</p></div><div class="week-grid" id="weekGrid"></div><div class="home-bottom"><span>01 — Registro series</span><span>02 — Guardo mi sesión</span><span>03 — Veo mi evolución</span></div></section>
-      <section class="page" id="workoutsPage" data-page="workouts"><div class="section-heading"><p class="eyebrow">MI PLAN DE FUERZA</p><h2>¿Qué entreno hoy?</h2><p>Conservo los ejercicios, las ilustraciones y las indicaciones de mi rutina original.</p></div><div class="workout-grid" id="workoutGrid"></div></section>
+      <section class="page" id="workoutsPage" data-page="workouts"><div class="section-heading"><p class="eyebrow">MI PLAN DE FUERZA</p><h2>¿Qué entreno hoy?</h2><p>Elijo una rutina o creo mi propio plan de ejercicios.</p></div><div class="button-row routine-toolbar"><a class="open-button" href="#editor">＋ Crear rutina</a><label class="secondary-light file-button">Importar rutina JSON<input id="importRoutine" type="file" accept=".json,application/json"></label></div><div class="workout-grid" id="workoutGrid"></div></section>
       <section class="page" id="sessionPage" data-page="session"><button class="back-button" type="button" data-route="workouts">← Mi rutina</button><div id="sessionContainer"></div></section>
       <section class="page" id="historyPage" data-page="history"><div class="section-heading"><p class="eyebrow">MI DIARIO</p><h2>Entrenamientos guardados</h2><p>Cada sesión conserva sus series, fecha, pesos y notas. Puedo corregirla cuando lo necesite.</p></div><div id="historyContainer"></div></section>
       <section class="page" id="statsPage" data-page="stats"><div class="section-heading"><p class="eyebrow">LO QUE VOY CONSTRUYENDO</p><h2>Mi progreso, en números</h2><p>Estadísticas calculadas con las series que marco como realizadas y las sesiones que guardo.</p></div><div id="statsContainer"></div></section>
       <section class="page" id="dietPage" data-page="diet"><div class="section-heading"><p class="eyebrow">MI PLAN DE NUTRICIÓN</p><h2>Comer para rendir</h2><p>Mi plan original de alimentación y hábitos, siempre a mano.</p></div><div id="dietContainer"></div></section>
-      <section class="page" id="backupPage" data-page="backup"><div class="section-heading"><p class="eyebrow">MI HISTORIAL ES MÍO</p><h2>Mis datos</h2><p>Se guardan en este navegador. No se sincronizan automáticamente entre dispositivos; exporto una copia para conservarlos o trasladarlos.</p></div><div class="diet-card"><h3>Copias y exportaciones</h3><p>La copia JSON incluye sesiones y borradores. Al importar, se añaden registros nuevos; para registros con el mismo identificador, se conserva la versión con la fecha de actualización más reciente.</p><div class="button-row"><button class="open-button" id="exportJson">Descargar copia JSON</button><button class="secondary-light" id="exportCsv">Exportar series a CSV</button><label class="secondary-light file-button">Importar copia JSON<input id="importJson" type="file" accept=".json,application/json"></label></div><p class="muted">Borrar los datos del navegador puede eliminar el historial. Las casillas de la versión anterior se conservan como referencia en la copia; no se convierten en sesiones con fechas inventadas.</p><p id="storageStatus"></p></div></section>
+      <section class="page" id="backupPage" data-page="backup"><div class="section-heading"><p class="eyebrow">MI HISTORIAL ES MÍO</p><h2>Mis datos</h2><p>Se guardan en este navegador. No se sincronizan automáticamente entre dispositivos; exporto una copia para conservarlos o trasladarlos.</p></div><div class="diet-card"><h3>Copias y exportaciones</h3><p>La copia JSON incluye sesiones, borradores de sesiones y rutinas personalizadas. Al importar, se añaden registros nuevos; para registros con el mismo identificador, se conserva la versión con la fecha de actualización más reciente.</p><div class="button-row"><button class="open-button" id="exportJson">Descargar copia JSON</button><button class="secondary-light" id="exportCsv">Exportar series a CSV</button><label class="secondary-light file-button">Importar copia JSON<input id="importJson" type="file" accept=".json,application/json"></label></div><p class="muted">Borrar los datos del navegador puede eliminar el historial. Las casillas de la versión anterior se conservan como referencia en la copia; no se convierten en sesiones con fechas inventadas.</p><p id="storageStatus"></p></div></section>
+      <section class="page" id="editorPage" data-page="editor"><a class="back-button" href="#workouts">← Mi rutina</a><div class="section-heading"><p class="eyebrow">MI PLAN, A MI MEDIDA</p><h2>Crear o editar una rutina</h2><p>Elijo ejercicios, series, repeticiones y descansos. Después puedo compartir mi plan.</p></div><div id="editorContainer"></div></section>
+      <section class="page" id="sharedPage" data-page="shared"><a class="back-button" href="#workouts">← Mi rutina</a><div id="sharedContainer"></div></section>
     </main>
     <footer class="footer"><p>MY GYM / Un entrenamiento a la vez.<br><small>Guardado en este navegador · <a href="#backup">Hacer una copia</a></small></p><a href="#top">Volver arriba ↑</a></footer>
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="shareDialog"></dialog><div id="toast" class="toast" role="status" aria-live="polite"></div>
   </div>
-  <script src="tracker.js?v=2"></script><script src="app.js?v=2"></script>
+  <script src="i18n.js?v=4"></script><script src="tracker.js?v=4"></script><script src="app.js?v=4"></script><script src="routines.js?v=4"></script>
 </body>
 </html>

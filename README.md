@@ -38,3 +38,15 @@ node --test tests/tracker.test.cjs
 ```
 
 Open `http://localhost:8000`. For GitHub Pages, use the `main` branch and repository root. All asset paths are relative so the site works under `/my_gym_routine/`.
+
+## Languages, themes and custom routines
+
+The interface, default exercise cues and nutrition plan support English, Spanish and Brazilian Portuguese. Select the language in the header; the sun/moon control switches light/dark mode. Preferences are stored separately in `myGymPreferences.v1`. With no saved preference, the theme follows the device's initial color preference. Custom names, descriptions and notes keep their author's language.
+
+Use **Create routine** to build a plan with 1–30 exercises, a day (or Flexible), warmup, sets, reps/seconds, rest and notes. Reorder exercises with the arrows; their stable IDs preserve comparable history. Custom routine definitions are included in journal JSON backups. Unsaved builder drafts are stored separately in `myGymRoutineEditor.v1` and resume on returning to the editor; they are not included in journal backups. The original routines can be copied and adapted.
+
+Every custom session keeps a validated snapshot of its routine. Editing or deleting the current template leaves earlier sessions intact. New sessions use the current template and load previous weights only for matching exercise IDs, names and units.
+
+**Share routine** generates a portable URL containing only the routine template. Recipients preview it and choose **Add to my routines**, which saves an independent local copy. No accounts or backend are required; logged weights, sessions and session notes are not included in routine links. Links are snapshots: later edits do not change a previously shared link. A routine JSON file is also available for downloading/importing, including as a fallback when a template is too long for a link. Names and exercise technique notes in the template are part of the shared content.
+
+Additional files: `i18n.js` (translations/preferences) and `routines.js` (builder/sharing). Serve over HTTP locally or HTTPS on Pages; clipboard and native share availability depend on the browser. If clipboard access is unavailable, the URL can be selected and copied manually. The header dropdown remains above mobile panels in both themes.
