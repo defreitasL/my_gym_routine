@@ -4,3 +4,10 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 body:not([data-view="home"]) .hero-content{display:none}body:not([data-view="home"]) .hero{padding-bottom:0}body:not([data-view="home"]) .hero:after{display:none}
+
+/* Let the mobile dropdown extend beyond the compact header, above page panels. */
+@media(max-width:720px){
+  .hero{overflow:visible;z-index:10}
+  .hero:after{display:none}
+  .nav-links{z-index:1;box-shadow:0 16px 32px #0003}
+}
