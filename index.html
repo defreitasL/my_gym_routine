@@ -1,48 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07182f" />
-  <meta name="description" content="Interactive 4-day upper/lower gym routine and optimized nutrition plan." />
-  <title>My Gym Routine</title>
+  <meta name="theme-color" content="#111b24" />
+  <meta name="description" content="Mi rutina Upper/Lower: registro de pesos y series, historial y progreso." />
+  <title>My Gym Routine · Mi entrenamiento</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app-shell">
     <header class="hero" id="top">
-      <nav class="topbar" aria-label="Main navigation">
-        <a class="brand" href="#home" aria-label="Go to home"><span class="brand-icon">🏋️</span><span>My Gym Routine</span></a>
-        <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="topbar" aria-label="Navegación principal">
+        <a class="brand" href="#home"><span class="brand-icon" aria-hidden="true">↗</span><span>MY GYM<span class="brand-sub">LUCAS / TRAINING JOURNAL</span></span></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir navegación" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
-          <a href="#home">Home</a>
-          <a href="#workouts">Workouts</a>
-          <a href="#diet">Diet</a>
-          <button class="ghost-button small" id="resetAllBtn" type="button">Reset week</button>
+          <a href="#home">Inicio</a><a href="#workouts">Rutina</a><a href="#history">Historial</a><a href="#stats">Progreso</a><a href="#diet">Nutrición</a><a href="#backup">Mis datos</a>
         </div>
       </nav>
       <section class="hero-content">
         <div class="hero-copy">
-          <p class="eyebrow">Upper / Lower • 4 days • 50–60 min</p>
-          <h1>Build strength, stay consistent, and track every set from your phone.</h1>
-          <p class="hero-text">Choose today’s workout, open the detailed session, check off exercises as you complete them, and keep the optimized diet plan one tap away.</p>
-          <div class="hero-actions"><a class="primary-button" href="#workouts">Start a workout</a><a class="secondary-button" href="#diet">Open diet plan</a></div>
+          <p class="eyebrow"><span class="status-dot"></span> MI PLAN · UPPER / LOWER · 4 DÍAS</p>
+          <h1>Cada serie<br>cuenta<span class="lime">.</span></h1>
+          <p class="hero-text">Mi rutina, mis pesos, mi progreso. Registro lo que hago hoy para entrenar mejor mañana.</p>
+          <div class="hero-actions"><a class="primary-button" href="#workouts">Entrenar ahora ↗</a><a class="secondary-button" href="#stats">Ver mi progreso</a></div>
         </div>
-        <aside class="hero-card" aria-label="Weekly progress summary">
-          <div class="ring" id="weeklyRing"><span id="weeklyPercent">0%</span></div>
-          <h2>This week</h2><p id="weeklySummary">No exercises checked yet.</p>
-          <div class="mini-stats"><div><strong>4</strong><span>Strength days</span></div><div><strong>2–3</strong><span>Cardio days</span></div><div><strong>8k–12k</strong><span>Steps/day</span></div></div>
+        <aside class="hero-card" aria-label="Resumen semanal">
+          <div class="card-top"><span class="eyebrow">ESTA SEMANA</span><span id="weekRange"></span></div>
+          <div class="weekly-number"><strong id="weeklyCount">0</strong><span>/ 4<br>sesiones objetivo</span></div>
+          <div class="progress-track"><div class="progress-fill" id="weeklyFill"></div></div>
+          <p id="weeklySummary">Mi siguiente sesión empieza aquí.</p>
+          <div class="mini-stats"><div><strong id="weeklySets">0</strong><span>series registradas</span></div><div><strong id="weeklyVolume">0</strong><span>kg · rep de volumen</span></div></div>
+          <a href="#history" class="text-link">Mi historial →</a>
         </aside>
       </section>
     </header>
     <main>
-      <section class="page active" id="homePage" data-page="home"><div class="section-heading"><p class="eyebrow">Weekly structure</p><h2>Your plan at a glance</h2><p>Four focused strength sessions, two flexible cardio days, and one proper recovery day.</p></div><div class="week-grid" id="weekGrid"></div></section>
-      <section class="page" id="workoutsPage" data-page="workouts"><div class="section-heading"><p class="eyebrow">Training menu</p><h2>Select your workout</h2><p>Open a session to see exercises, visual cues, rest times, coaching notes, and checkboxes.</p></div><div class="workout-grid" id="workoutGrid"></div></section>
-      <section class="page" id="sessionPage" data-page="session"><button class="back-button" type="button" data-route="workouts">← Back to workouts</button><div id="sessionContainer"></div></section>
-      <section class="page" id="dietPage" data-page="diet"><div class="section-heading"><p class="eyebrow">Optimized nutrition</p><h2>Meal plan for recomposition</h2><p>Designed to slowly lose fat while maintaining strength, muscle mass, and morning training energy.</p></div><div id="dietContainer"></div></section>
+      <section class="page active" id="homePage" data-page="home"><div id="resumeBanner"></div><div class="section-heading"><p class="eyebrow">CONSTANCIA, A MI RITMO</p><h2>Mi semana de entrenamiento</h2><p>Cuatro sesiones de fuerza, dos días flexibles de cardio y un día de recuperación.</p></div><div class="week-grid" id="weekGrid"></div><div class="home-bottom"><span>01 — Registro series</span><span>02 — Guardo mi sesión</span><span>03 — Veo mi evolución</span></div></section>
+      <section class="page" id="workoutsPage" data-page="workouts"><div class="section-heading"><p class="eyebrow">MI PLAN DE FUERZA</p><h2>¿Qué entreno hoy?</h2><p>Conservo los ejercicios, las ilustraciones y las indicaciones de mi rutina original.</p></div><div class="workout-grid" id="workoutGrid"></div></section>
+      <section class="page" id="sessionPage" data-page="session"><button class="back-button" type="button" data-route="workouts">← Mi rutina</button><div id="sessionContainer"></div></section>
+      <section class="page" id="historyPage" data-page="history"><div class="section-heading"><p class="eyebrow">MI DIARIO</p><h2>Entrenamientos guardados</h2><p>Cada sesión conserva sus series, fecha, pesos y notas. Puedo corregirla cuando lo necesite.</p></div><div id="historyContainer"></div></section>
+      <section class="page" id="statsPage" data-page="stats"><div class="section-heading"><p class="eyebrow">LO QUE VOY CONSTRUYENDO</p><h2>Mi progreso, en números</h2><p>Estadísticas calculadas con las series que marco como realizadas y las sesiones que guardo.</p></div><div id="statsContainer"></div></section>
+      <section class="page" id="dietPage" data-page="diet"><div class="section-heading"><p class="eyebrow">MI PLAN DE NUTRICIÓN</p><h2>Comer para rendir</h2><p>Mi plan original de alimentación y hábitos, siempre a mano.</p></div><div id="dietContainer"></div></section>
+      <section class="page" id="backupPage" data-page="backup"><div class="section-heading"><p class="eyebrow">MI HISTORIAL ES MÍO</p><h2>Mis datos</h2><p>Se guardan en este navegador. No se sincronizan automáticamente entre dispositivos; exporto una copia para conservarlos o trasladarlos.</p></div><div class="diet-card"><h3>Copias y exportaciones</h3><p>La copia JSON incluye sesiones y borradores. Al importar, se añaden registros nuevos; para registros con el mismo identificador, se conserva la versión con la fecha de actualización más reciente.</p><div class="button-row"><button class="open-button" id="exportJson">Descargar copia JSON</button><button class="secondary-light" id="exportCsv">Exportar series a CSV</button><label class="secondary-light file-button">Importar copia JSON<input id="importJson" type="file" accept=".json,application/json"></label></div><p class="muted">Borrar los datos del navegador puede eliminar el historial. Las casillas de la versión anterior se conservan como referencia en la copia; no se convierten en sesiones con fechas inventadas.</p><p id="storageStatus"></p></div></section>
     </main>
-    <footer class="footer"><p>Progress saves locally on this device. Add this page to your phone home screen for gym use.</p><a href="#top">Back to top ↑</a></footer>
+    <footer class="footer"><p>MY GYM / Un entrenamiento a la vez.<br><small>Guardado en este navegador · <a href="#backup">Hacer una copia</a></small></p><a href="#top">Volver arriba ↑</a></footer>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </div>
-  <script src="app.js"></script>
+  <script src="tracker.js"></script><script src="app.js"></script>
 </body>
 </html>
